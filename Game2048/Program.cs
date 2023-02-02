@@ -126,6 +126,11 @@ namespace Game2048
                         if (action)
                         {
                             AddNewCell();
+
+                            if (Square.Length == 36)
+                            {
+                                AddNewCell();
+                            }
                         }
 
                         return action;
@@ -227,6 +232,11 @@ namespace Game2048
                         if (action)
                         {
                             AddNewCell();
+
+                            if (Square.Length == 36)
+                            {
+                                AddNewCell();
+                            }
                         }
 
                         return action;
@@ -328,6 +338,11 @@ namespace Game2048
                         if (action)
                         {
                             AddNewCell();
+
+                            if (Square.Length == 36)
+                            {
+                                AddNewCell();
+                            }
                         }
 
                         return action;
@@ -429,6 +444,11 @@ namespace Game2048
                         if (action)
                         {
                             AddNewCell();
+
+                            if (Square.Length == 36)
+                            {
+                                AddNewCell();
+                            }
                         }
 
                         return action;
@@ -436,6 +456,31 @@ namespace Game2048
             }
 
             return false;
+        }
+
+        public bool YouWin()
+        {
+            if (Square == null)
+            {
+                return false;
+            }
+
+            bool action = false;
+
+            byte n = (byte)Math.Sqrt(Square.Length);
+
+            for(byte i = 0; i < n; i++)
+            {
+                for(byte j = 0; j < n; j++)
+                {
+                    if (Square[i, j] == 2048)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return action;
         }
 
         public bool TheEnd()
@@ -811,6 +856,8 @@ namespace Game2048
 
             Console.WriteLine("==============================");
 
+            Console.WriteLine("Move (← ↑ → ↓).");
+
             Console.WriteLine("Score: {0}", in_core.ScoreGame);
         }
         
@@ -1145,7 +1192,103 @@ namespace Game2048
                 if (UpdateWindow)
                 {
                     BoardRendering(ref _Core);
+                    
+                    if (_Core.YouWin())
+                    {
+                        Console.WriteLine("You win!");
+                        
+                        Console.WriteLine("==============================");
 
+                        Console.Write("Are you sure you want to start a new game (Y-Yes, N-No)? ");
+
+                        byte leftNew = (byte)Console.CursorLeft;
+
+                        byte topNew = (byte)Console.CursorTop;
+
+                        ConsoleKeyInfo NewKey;
+
+                        bool NewBoolean = false;
+
+                        do
+                        {
+                            NewKey = Console.ReadKey();
+
+                            Console.SetCursorPosition(leftNew, topNew);
+
+                            switch (NewKey.Key)
+                            {
+                                case ConsoleKey.Y:
+                                    {
+                                        Console.Clear();
+
+                                        Console.WriteLine("==============================");
+
+                                        Console.Write("Enter board dimension (4 or 6): ");
+
+                                        left = (byte)Console.CursorLeft;
+
+                                        top = (byte)Console.CursorTop;
+
+                                        bool t = false;
+
+                                        do
+                                        {
+                                            KeyNow = Console.ReadKey();
+
+                                            switch (KeyNow.Key)
+                                            {
+                                                case ConsoleKey.D4:
+                                                    {
+                                                        _Core = new GameCore2048(4);
+
+                                                        _Core.NewGame();
+
+                                                        t = true;
+                                                    }
+                                                    break;
+
+                                                case ConsoleKey.D6:
+                                                    {
+                                                        _Core = new GameCore2048(6);
+
+                                                        _Core.NewGame();
+
+                                                        t = true;
+                                                    }
+                                                    break;
+
+                                                default:
+                                                    {
+                                                        Console.SetCursorPosition(left, top);
+                                                    }
+                                                    break;
+                                            }
+
+                                        } while (!t);
+
+                                        _Core.NewGame();
+
+                                        NewBoolean = true;
+
+                                        UpdateWindow = true;
+                                    }
+                                    break;
+
+                                case ConsoleKey.N:
+                                    {
+                                        if (File.Exists("save0"))
+                                        {
+                                            File.Delete("save0");
+                                        }
+
+                                        Environment.Exit(0);
+                                    }
+                                    break;
+                            }
+
+                        } while (!NewBoolean);
+                    }
+                    
                     if (_Core.TheEnd())  // the end?
                     {
                         Console.WriteLine("Game over!");
