@@ -926,6 +926,26 @@ namespace Game2048
                             }
                             break;
 
+                        case ConsoleKey.NumPad4:
+                            {
+                                _Core = new GameCore2048(4);
+
+                                _Core.NewGame();
+
+                                t = true;
+                            }
+                            break;
+
+                        case ConsoleKey.NumPad6:
+                            {
+                                _Core = new GameCore2048(6);
+
+                                _Core.NewGame();
+
+                                t = true;
+                            }
+                            break;
+
                         case ConsoleKey.Escape:
                             {
                                 Console.Write("\nPress key...");
@@ -1134,7 +1154,27 @@ namespace Game2048
                                                             t = true;
                                                         }
                                                         break;
-                                                        
+
+                                                    case ConsoleKey.NumPad4:
+                                                        {
+                                                            _Core = new GameCore2048(4);
+
+                                                            _Core.NewGame();
+
+                                                            t = true;
+                                                        }
+                                                        break;
+
+                                                    case ConsoleKey.NumPad6:
+                                                        {
+                                                            _Core = new GameCore2048(6);
+
+                                                            _Core.NewGame();
+
+                                                            t = true;
+                                                        }
+                                                        break;
+
                                                     default:
                                                         {
                                                             Console.SetCursorPosition(left, top);
@@ -1257,6 +1297,26 @@ namespace Game2048
                                                     }
                                                     break;
 
+                                                case ConsoleKey.NumPad4:
+                                                    {
+                                                        _Core = new GameCore2048(4);
+
+                                                        _Core.NewGame();
+
+                                                        t = true;
+                                                    }
+                                                    break;
+
+                                                case ConsoleKey.NumPad6:
+                                                    {
+                                                        _Core = new GameCore2048(6);
+
+                                                        _Core.NewGame();
+
+                                                        t = true;
+                                                    }
+                                                    break;
+
                                                 default:
                                                     {
                                                         Console.SetCursorPosition(left, top);
@@ -1346,6 +1406,26 @@ namespace Game2048
                                                     break;
 
                                                 case ConsoleKey.D6:
+                                                    {
+                                                        _Core = new GameCore2048(6);
+
+                                                        _Core.NewGame();
+
+                                                        t = true;
+                                                    }
+                                                    break;
+
+                                                case ConsoleKey.NumPad4:
+                                                    {
+                                                        _Core = new GameCore2048(4);
+
+                                                        _Core.NewGame();
+
+                                                        t = true;
+                                                    }
+                                                    break;
+
+                                                case ConsoleKey.NumPad6:
                                                     {
                                                         _Core = new GameCore2048(6);
 
